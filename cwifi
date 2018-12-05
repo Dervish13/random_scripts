@@ -1,0 +1,8 @@
+
+#!/bin/sh
+# Script to change wifi on bsd quickly
+sudo cp /etc/wpa_supplicant.conf /etc/temporary
+sudo cp /etc/wpa_change /etc/wpa_supplicant.conf
+sudo cp /etc/temporary /etc/wpa_change
+
+sudo service netif restart
