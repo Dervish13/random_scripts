@@ -1,0 +1,10 @@
+#!/bin/sh
+
+var=`sysctl hw.snd.default_unit | tail -c 2 | head -c 1`
+if  [ "$var" == "1" ]; then
+ sysctl hw.snd.default_unit=0
+elif [ "$var" == "0" ]; then
+ sysctl hw.snd.default_unit=1
+else
+  echo "default output is unknown"
+fi
