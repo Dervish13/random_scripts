@@ -1,3 +1,8 @@
 #!/bin/sh
 
-ls -la
+if [ -z $1 ]
+    then
+      ls -la
+else
+      ls -la $1
+  fi
