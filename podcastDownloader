@@ -1,0 +1,28 @@
+#!/bin/sh
+
+PODCASTSDIRECTORY=podcasts
+
+if [ ! -f latestEpisode ]
+then
+  echo "Latest Episode file does not exist, creating one for you, please update it to the latest episode you want to download"
+  echo "240" > latestEpisode
+  EPISODENUMBER=$(cat latestEpisode)
+else
+  EPISODENUMBER=$(cat latestEpisode)
+fi
+
+if [ ! -f $PODCASTSDIRECTORY/defensive_security_podcast_episode_$EPISODENUMBER.mp3 ]
+then
+  wget --directory-prefix $PODCASTSDIRECTORY https://media.defensivesecurity.org/defensive_security_podcast_episode_$EPISODENUMBER.mp3
+  if [ $? -eq 0 ]
+  then
+    echo "Your downloaded episodes:"
+    ls -1 podcasts/
+    EPISODENUMBER=$((EPISODENUMBER+1))
+    echo $EPISODENUMBER > latestEpisode
+  fi
+else
+  echo "You have already downloaded the latest episode"
+  echo "Your downloaded episodes:"
+  ls -1 podcasts/
+fi
